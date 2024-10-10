@@ -21,7 +21,7 @@ export class CartProductsComponent implements OnInit {
       console.log(this.addProductdata[index]);
       localStorage.setItem('cartProduct', JSON.stringify(this.addProductdata));
     }
-    
+    this.getcalculateTotalPrice();
   }
 
   addCardDecrease(index: any) {
@@ -31,7 +31,7 @@ export class CartProductsComponent implements OnInit {
       }
       localStorage.setItem('cartProduct', JSON.stringify(this.addProductdata));
     }
-    
+    this.getcalculateTotalPrice();
   }
 
   ngOnInit() {
@@ -55,21 +55,10 @@ export class CartProductsComponent implements OnInit {
     this.discountProductPercentage = discountPercentage.toFixed(2);
 
     const discountAmount = parseFloat(((this.discountProductPercentage / 100) * this.productPrice).toFixed(2));
+    const totalProductCount = this.addProductdata.reduce((sumCount, productCount) => sumCount + productCount.count, 0);
 
     this.discountedPrice = parseFloat((this.productPrice - discountAmount).toFixed(2));
-    this.totalPrice = this.productPrice - this.discountedPrice + this.deliveryFee;
-    // let  cartTotal = {
-    //   subtotal: 0,
-    //   finalAmount: 0
-    // }
-
-    // productObject.filter(el=>{
-
-    //  cart.subtotal = finalAmount
-    // })
-    // cart.finalTotal =   cart.subtotal +delovery;
-
-    // return  cartTotal;
+    this.totalPrice = (this.productPrice - this.discountedPrice + this.deliveryFee) *  totalProductCount;
   }
   getAddProductItem() {
     const productObject = localStorage.getItem('cartProduct');
