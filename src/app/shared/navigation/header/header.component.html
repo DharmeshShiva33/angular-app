@@ -1,0 +1,38 @@
+<p-menubar [model]="menuItem">
+    <ng-template pTemplate="start">
+        <div class="flex gap-4">
+            <img src="assets/images/logo.svg" alt="logo">
+        </div>
+    </ng-template>
+    <ng-template pTemplate="menuItem" let-menuItem let-root="root">
+        <a pRipple class="flex align-items-center p-menuitem-link">
+            <span class="ml-2" [class]="menuItem.icon" ></span>
+            <span class="ml-2">{{ menuItem.label }}</span>
+            @if (menuItem.items) {
+                <i [ngClass]="['pi', root ? 'pi-angle-down mx-2' : 'pi-angle-right ml-auto']"></i>
+            }
+        </a>
+    </ng-template>
+    
+    <ng-template pTemplate="end">
+        <div class="flex align-items-center gap-5">
+            <input 
+            type="text" 
+            pInputText
+            [(ngModel)]="inputValue"
+            (keyup)="emitFilterValue()"  
+            placeholder="Search for products..."
+             />
+            <div class="flex align-items-center gap-3">
+                <p-button icon="pi pi-shopping-cart" [rounded]="true" [text]="true" routerLink="/cart-products">
+                    <ng-template pTemplate="badge">
+                        <p-badge  *ngIf="item > 0" [value]="item"></p-badge>
+                    </ng-template>
+                </p-button>
+                
+                <!-- <i class="pi pi-shopping-cart" ><p-badge *ngIf="notificationCount > 0" [value]="222"></p-badge></i> -->
+                <i class="pi pi-user"></i>
+            </div>
+        </div>
+    </ng-template>
+</p-menubar>

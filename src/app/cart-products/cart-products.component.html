@@ -1,0 +1,62 @@
+<section>
+    <div>
+        <app-header></app-header>
+    </div>
+    <div class="p-4">
+        <div>
+            <h1 class="text-6xl" style="font-weight: 800;">Your cart</h1>
+        </div>
+        <div class="flex gap-4">
+            <div class="p-3 w-8 border-1 border-round ">
+                @for (itemList of addProductdata; track $index) {
+                    <div class="flex gap-2">
+                        <img class="border-1 border-round" [src]="itemList.images[0]" alt="" width="120px" height="120px">
+                        <div class="flex flex-1 flex-column gap-2">
+                            <div class="flex justify-content-between align-items-start">
+                                <h3>{{itemList.title}}</h3>
+                                <p-button icon="pi pi-trash" [rounded]="true" [text]="true" severity="danger " (onClick)="deleteCartProduct($index)" />
+                            </div>
+                            <span>SKU : <b>{{itemList.sku}}</b></span>
+                            <span>Stock : <b>{{itemList.stock}}</b></span>
+                            <div class="flex justify-content-between align-items-center">
+                                <h2>{{ itemList.price | currency }}</h2>
+                                <div class="flex gap-2">
+                                    <p-button icon="pi pi-minus" [rounded]="true" [text]="true" [raised]="true" severity="contrast " (onClick)="addCardDecrease($index)" />
+                                    <input type="text" pInputText style="width: 50px; text-align: center;" [(ngModel)]="itemList.count" />
+                                    <p-button icon="pi pi-plus" [rounded]="true" [text]="true" [raised]="true" severity="contrast " (onClick)="addCardIncreament($index)" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <p-divider *ngIf="$index !== addProductdata.length -1" />
+                }
+            </div>
+            <div class="p-3 w-4 border-1 border-round">
+                <h2>Order Summary</h2>
+                <ul class="price-list">
+                    <li class="price-list-item">
+                        <span>Subtotal</span>
+                        <b>{{productPrice}}</b>
+                    </li>
+                    <li class="price-list-item">
+                        <span>Discount (-{{discountProductPercentage}})</span>
+                        <b class="text-red-500">{{'-' + discountedPrice}}</b>
+                    </li>
+                    <li class="price-list-item">
+                        <span>Delivery Fee</span>
+                        <b>{{deliveryFee}}</b>
+                    </li>
+                    <p-divider />
+                    <li class="price-list-item text-3xl">
+                        <span>Total</span>
+                        <b>{{totalPrice | currency}}</b>
+                    </li>
+                </ul>
+                <div class="p-2 flex justify-content-center">
+                    <p-button label="Go to Checkout"
+                        severity="contrast" />
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

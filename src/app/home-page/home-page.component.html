@@ -1,0 +1,71 @@
+<section>
+    <app-header (valueChange)="filterInputData($event)"></app-header>
+    <div class="product-wrap flex">
+        <div class="Product-filter" style="min-width: 300px;">
+            <div class="p-2 flex justify-content-between align-items-center border-bottom-2 border-primary-500">
+                <h2>Filter</h2>
+                <p-button icon="pi pi-filter-fill" [rounded]="true" [text]="true" severity="success " />
+            </div>
+            <div>
+                <p-listbox
+                    [options]="productCategoriesData"
+                    optionLabel="name"
+                    [(ngModel)]="selectedProductCategoriesValue" 
+                    [listStyle]="{'min-height': '100%'}"
+                    (ngModelChange)="onProductCategoriesChange($event)">
+                    <ng-container *ngFor="let city of productCategoriesData">
+                        <p-listboxItem [label]="city.name" [value]="city.slug"></p-listboxItem>
+                    </ng-container>
+                </p-listbox>
+               <!-- <p-menu [model]="productCategoriesList" /> -->
+            </div>
+            <p-divider />
+            <div>
+                <h1 class="mb-4">Price</h1>
+                <div>
+                    <div class="flex justify-content-center">
+                        <p-slider [(ngModel)]="priceRangeValues" [range]="true"  [min]="minPrice" [max]="maxPrice" styleClass="w-16rem"  (onChange)="onPriceChange()" />
+                    </div>
+                    <div class="p-4 flex justify-content-between align-items-center">
+                        <b>{{minPrice}}</b>
+                        <b>{{maxPrice}}</b>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <p-divider layout="vertical" />
+
+        <div class="product-list flex-1">
+            <div class="flex justify-content-between align-items-center">
+                <h1>Casual</h1>
+                <div class="flex align-items-center gap-1">
+                    <p class="flex">Showing 1-10 of 100 Products Sort by:</p>
+                    <p-dropdown 
+                    [options]="mostPopularItemStatus"
+                    optionLabel="name"
+                    placeholder="Most Popular" />
+                </div>
+            </div>
+            <ul class="flex flex-wrap gap-5" style="padding: 20px;">
+                @for ( productItem of filteredProducts; track $index) {
+                    <li class="product-details-card p-4 shadow-2 border-round" style=" width: 100%; max-width: 295px;" (click)="onProductDetails(productItem.id)">
+                        <div class="flex justify-content-center align-items-center surface-500 border-round">
+                            <img class="mb-3" alt="Card" [src]="productItem.images[0]" style="max-width: 295px; height: 298px;"/>
+                        </div>
+                        <div class="px-2">
+                            <h3 class="mb-2">{{productItem.title}}</h3>
+                            <p-rating [(ngModel)]="productItem.rating" [readonly]="true" [cancel]="false" />
+                            <h1 class="mt-2">{{ productItem.price | currency }}</h1>
+                        </div>
+                    </li>
+                }
+            </ul>
+            @if (filteredProducts.length == 0) {
+                <p-card class="flex justify-content-center align-items-center">
+                    <h1>NO DATA FOUND</h1>
+                </p-card>
+            }
+
+        </div>
+    </div>
+</section>
