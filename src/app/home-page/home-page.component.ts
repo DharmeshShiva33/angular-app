@@ -2,9 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { MenuItem } from 'primeng/api';
+import { Subscription } from 'rxjs';
 
 import { MostPopulat, ProductType } from '@/_models';
 import { ProductService } from '@/_services';
+
 
 @Component({
   selector: 'app-home-page',
@@ -38,6 +40,8 @@ export class HomePageComponent implements OnInit {
   public priceRangeValues: number[] = [];
   public filteredProducts: any;
   public filterValue: string = "";
+  private subscription: Subscription;
+
 
 
   constructor(private router: Router, private _productServices: ProductService) {}
@@ -113,4 +117,9 @@ export class HomePageComponent implements OnInit {
     this.filterProductsByPrice();
   }
 
+  ngOnDestroy() {
+    if(this.subscription) {
+      this.subscription.unsubscribe();
+    }
+  }
 }

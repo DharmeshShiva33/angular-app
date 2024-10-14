@@ -15,13 +15,19 @@ export class CartProductsComponent implements OnInit {
   public deliveryFee: number = 15;
   public totalPrice: number = 0;
 
+  ngOnInit() {
+    this.getAddProductItem();
+    // this.getcalculateTotalPrice();
+  }
+
   addCardIncreament(index: any) {
     if(index >= 0 && index < this.addProductdata.length) {
       this.addProductdata[index].count++;
-      console.log(this.addProductdata[index]);
+      // console.log(this.addProductdata[index]);
       localStorage.setItem('cartProduct', JSON.stringify(this.addProductdata));
     }
-    this.getcalculateTotalPrice();
+
+    //this.getcalculateTotalPrice();
   }
 
   addCardDecrease(index: any) {
@@ -31,12 +37,7 @@ export class CartProductsComponent implements OnInit {
       }
       localStorage.setItem('cartProduct', JSON.stringify(this.addProductdata));
     }
-    this.getcalculateTotalPrice();
-  }
-
-  ngOnInit() {
-    this.getAddProductItem();
-    this.getcalculateTotalPrice();
+    // this.getcalculateTotalPrice();
   }
 
   deleteCartProduct(index: any) {
@@ -47,19 +48,20 @@ export class CartProductsComponent implements OnInit {
     }
   }
 
-  getcalculateTotalPrice(){
+  // getcalculateTotalPrice(){
 
-    this.productPrice = this.addProductdata.reduce((sum, product) => sum + product.price , 0);
-    const discountPercentage = this.addProductdata.reduce((sum, discountProduct) => sum + discountProduct.discountPercentage, 0 );
+  //   this.productPrice = this.addProductdata.reduce((sum, product) => sum + product.price , 0);
+  //   const discountPercentage = this.addProductdata.reduce((sum, discountProduct) => sum + discountProduct.discountPercentage, 0 );
 
-    this.discountProductPercentage = discountPercentage.toFixed(2);
+  //   this.discountProductPercentage = discountPercentage.toFixed(2);
 
-    const discountAmount = parseFloat(((this.discountProductPercentage / 100) * this.productPrice).toFixed(2));
-    const totalProductCount = this.addProductdata.reduce((sumCount, productCount) => sumCount + productCount.count, 0);
+  //   const discountAmount = parseFloat(((this.discountProductPercentage / 100) * this.productPrice).toFixed(2));
+  //   const totalProductCount = this.addProductdata.reduce((sumCount, productCount) => sumCount + productCount.count, 0);
 
-    this.discountedPrice = parseFloat((this.productPrice - discountAmount).toFixed(2));
-    this.totalPrice = (this.productPrice - this.discountedPrice + this.deliveryFee) *  totalProductCount;
-  }
+  //   this.discountedPrice = parseFloat((this.productPrice - discountAmount).toFixed(2));
+  //   this.totalPrice = (this.productPrice - this.discountedPrice + this.deliveryFee) *  totalProductCount;
+  // }
+
   getAddProductItem() {
     const productObject = localStorage.getItem('cartProduct');
       if (productObject) {
@@ -67,4 +69,5 @@ export class CartProductsComponent implements OnInit {
       console.log(this.addProductdata);
       }
   }
+
 }

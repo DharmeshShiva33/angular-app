@@ -1,0 +1,27 @@
+<div>
+    <h2>Order Summary</h2>  
+    <ul class="price-list">
+        <li class="price-list-item">
+            <span>Subtotal</span>
+            <b>{{productPrice}}</b>
+        </li>
+        <li class="price-list-item">
+            <span>Discount (-{{discountProductPercentage}})</span>
+            <b class="text-red-500">{{'-' + discountedPrice}}</b>
+        </li>
+        <li class="price-list-item">
+            <span>Delivery Fee</span>
+            <b>{{15}}</b>
+        </li>
+        <p-divider />
+        <li class="price-list-item text-3xl">
+            <span>Total</span>
+            <b>{{totalPrice}}</b>
+        </li>
+    </ul>
+    <div class="p-2 flex justify-content-center">
+        <p-button label="Go to Checkout"
+            severity="contrast" />
+    </div>
+    <!-- <button (click)="getcalculateTotalPrice()">sdsds</button> -->
+</div>

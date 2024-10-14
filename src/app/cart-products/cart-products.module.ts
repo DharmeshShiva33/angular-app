@@ -5,7 +5,7 @@ import { ButtonModule } from 'primeng/button';
 import { FormsModule } from '@angular/forms';
 import { DividerModule } from 'primeng/divider';
 
-import { HeaderComponent } from '@/shared';
+import { HeaderComponent, OrderDetailComponent } from '@/shared';
 import { CartProductsComponent } from './cart-products.component';
 import { CartProductsRoutingModule } from './cart-products-routing.module';
 
@@ -20,6 +20,7 @@ import { CartProductsRoutingModule } from './cart-products-routing.module';
     FormsModule,
     DividerModule,
     ButtonModule,
+    OrderDetailComponent,
     CartProductsRoutingModule
   ]
 })

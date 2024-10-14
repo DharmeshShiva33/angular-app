@@ -1,0 +1,11 @@
+.flex-container {
+    display: flex;
+    width: 100%; /* Ensures the container takes full width */
+  }
+  
+  .flex {
+    flex: 1; /* Makes the dropdown expand to fill the container */
+  }
+  .error-validation {
+    height: 20px;
+  }

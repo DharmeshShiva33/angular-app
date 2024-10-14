@@ -1,0 +1,129 @@
+<section>
+    <div class="p-2">
+        <div>
+            <h1 class="p-2 text-5xl text-white surface-900 border-round">Checkout</h1>
+        </div>
+        <div class="flex gap-2">
+            <form [formGroup]="checkoutForm" (ngSubmit)="checkoutFormOnSubmit()" class="w-8">
+                <div class="py-4 flex flex-column gap-2">
+                    <div class="flex gap-2">
+                        <div class="flex flex-1 flex-column gap-1">
+                            <label for="username"><b>First Name</b></label>
+                            <input 
+                                pInputText 
+                                formControlName="firstName" />
+                            <small class="text-red-600 error-validation">
+                                @if (checkoutForm.controls['firstName'].invalid && checkoutForm.controls['firstName'].touched) {
+                                        {{getCheckoutFormErrorMessage('firstName')}}
+                                    }
+                            </small>
+                        </div>
+                        <div class="flex flex-1 flex-column gap-1">
+                            <label for="username"><b>Last Name</b></label>
+                            <input 
+                                pInputText 
+                                formControlName="lastName" />
+                            <small class="text-red-600 error-validation">
+                                @if (checkoutForm.controls['lastName'].invalid && checkoutForm.controls['lastName'].touched) {
+                                    {{getCheckoutFormErrorMessage('lastName')}}
+                                }
+                            </small>
+                        </div>
+                    </div>
+                    <div class="flex gap-2">
+                        <div class="flex flex-1 flex-column gap-1">
+                            <label for="username"><b>Mobile Number</b></label>
+                            <input 
+                                pInputText 
+                                formControlName="mobileNumber"
+                                minlength="10"
+                                maxlength="10" />
+                            <small class="text-red-600 error-validation">
+                                @if (checkoutForm.controls['mobileNumber'].invalid && checkoutForm.controls['mobileNumber'].touched) {
+                                        {{getCheckoutFormErrorMessage('mobileNumber')}}
+                                    }
+                            </small>
+                        </div>
+                        <div class="flex flex-1 flex-column gap-1">
+                            <label for="username"><b>PAN Number</b></label>
+                            <input 
+                                pInputText 
+                                formControlName="panNumber" />
+                            <small class="text-red-600 error-validation">
+                                @if (checkoutForm.controls['panNumber'].invalid && checkoutForm.controls['panNumber'].touched) {
+                                    {{getCheckoutFormErrorMessage('panNumber')}}
+                                }
+                            </small>
+                        </div>
+                    </div>
+                    <div class="flex flex-column gap-1">
+                        <label for="username"><b>Street Address</b></label>
+                        <input 
+                            pInputText 
+                            formControlName="streetAddress" />
+                        <small class="text-red-600 error-validation">
+                            @if (checkoutForm.controls['streetAddress'].invalid && checkoutForm.controls['streetAddress'].touched) {
+                                    {{getCheckoutFormErrorMessage('streetAddress')}}
+                                }
+                        </small>
+                    </div>
+                    <div class="flex flex-column gap-1">
+                        <label for="username"><b>Appartment</b></label>
+                        <input 
+                            pInputText 
+                            formControlName="appartment" />
+                        <small class="text-red-600 error-validation">
+                            @if (checkoutForm.controls['appartment'].invalid && checkoutForm.controls['appartment'].touched) {
+                                    {{getCheckoutFormErrorMessage('appartment')}}
+                                }
+                        </small>
+                    </div>
+                    <div class="flex flex-row gap-2">
+                        <div class="flex flex-column gap-1">
+                            <label for="username"><b>city</b></label>
+                            <input 
+                                pInputText 
+                                formControlName="city" />
+                            <small class="text-red-600 error-validation">
+                                @if (checkoutForm.controls['city'].invalid && checkoutForm.controls['city'].touched) {
+                                        {{getCheckoutFormErrorMessage('city')}}
+                                    }
+                            </small>
+                        </div>
+                        <div class="flex flex-column gap-1">
+                            <label for="username"><b>State</b></label>
+                            <p-dropdown
+                                [options]="country" 
+                                optionLabel="name"
+                                placeholder="Select a City"
+                                formControlName="state" />
+                            <small class="text-red-600 error-validation">
+                                @if (checkoutForm.controls['state'].invalid && checkoutForm.controls['state'].touched) {
+                                        {{getCheckoutFormErrorMessage('state')}}
+                                    }
+                            </small>
+                        </div>
+                        <div class="flex flex-column gap-1">
+                            <label for="username"><b>Pin Code</b></label>
+                            <input 
+                                pInputText 
+                                formControlName="pinCode" />
+                            <small class="text-red-600 error-validation">
+                                @if (checkoutForm.controls['pinCode'].invalid && checkoutForm.controls['pinCode'].touched) {
+                                        {{getCheckoutFormErrorMessage('pinCode')}}
+                                    }
+                            </small>
+                        </div>
+                    </div>
+                    <div class="flex justify-content-end">
+                        <p-button label="Submit" type="submit" />
+                    </div>
+                </div>
+            </form>
+            <div class="m-3 p-3 w-4 border-1 border-round">
+                <app-order-detail 
+                [OrderDetailsData]="orderDetails"></app-order-detail>
+            </div>
+        </div>
+    </div>
+</section>
